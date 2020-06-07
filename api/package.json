@@ -4,7 +4,7 @@
   "description": "serviço para servir dados para meu portifólio",
   "main": "index.js",
   "scripts": {
-    "dev":"node index.js",
+    "dev": "node index.js",
     "test": "test"
   },
   "repository": {
@@ -15,5 +15,8 @@
     "Portifólio"
   ],
   "author": "Joel Maykon",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }
