@@ -7,22 +7,22 @@
      
 </p>
 
-### Tópicos
-
-
 - [Resumo do projeto Node JS :book:](#resumo-do-projeto-node-js-book)
 - [NPM a ferramenta para gestão de pacotes :hammer:](#npm-a-ferramenta-para-gestão-de-pacotes-hammer)
-- [Início de um projeto Node :seedling:](#início-de-um-projeto-node-seedling)
+  - [Início de um projeto Node :seedling:](#início-de-um-projeto-node-seedling)
   - [Conceitos dentro de um projeto NODE.JS :school:](#conceitos-dentro-de-um-projeto-nodejs-school)
     - [Sincronia de funçoes Javascript :repeat:](#sincronia-de-funçoes-javascript-repeat)
     - [Ciclo de vida Javascrip :arrows_counterclockwise:](#ciclo-de-vida-javascrip-arrows_counterclockwise)
     - [Promises ciclo de vida :star:](#promises-ciclo-de-vida-star)
     - [Refatoração das callbacks para promise :dizzy:](#refatoração-das-callbacks-para-promise-dizzy)
+    - [Utilizando o Event emitter](#utilizando-o-event-emitter)
+  - [Manipulação  e otimização de listas](#manipulação-e-otimização-de-listas)
+    - [For, Forin e Forof](#for-forin-e-forof)
+    - [Usando o Array.Map e foreach](#usando-o-arraymap-e-foreach)
+    - [Trabalhando com  um  Array.Filter](#trabalhando-com-um-arrayfilter)
+    - [Trabalhando com Array.reduce](#trabalhando-com-arrayreduce)
 - [Desenvolvedores/Contribuintes :)](#desenvolvedorescontribuintes-)
 - [Licença](#licença)
-
-
-
 
 ## Resumo do projeto Node JS :book:
 
@@ -30,7 +30,7 @@
    O conteudo foi baseado em uma pesquisa feitas pelo Trainer  <a href="https://www.linkedin.com/in/erickwendel">Erick Wendel</a>  para saber quais as maiores dificuldades do desenvolvedores javascript para torna-se mais produtivo, e o objetivo é ter uma aplicação que vai do básico ao nível de produção documentada, funcionando de ponta a ponta.  
 </p>
 
-- 1º Usar Conceitos do javascript
+- 1º Usar Conceitos do Node.js e javascript
 - 2º Manipulação de listas e otimização de performace das listas.
 - 3º Criação de ferramentas de linha de comando.
 - 4º Trabalhar com multiplos banco de dados.
@@ -49,7 +49,7 @@
 
 :arrow_up: Voltar para os [Tópicos](#tópicos)
 
-## Início de um projeto Node :seedling:
+### Início de um projeto Node :seedling:
 
 - criar um diretorio para o projeto
 - dentro da pasta criada dar o comando `npm init`
@@ -64,19 +64,19 @@
 
 #### Sincronia de funçoes Javascript :repeat:
 
-![node api  bindings](https://www.luiztools.com.br/wp-content/uploads/2017/04/nodejs.jpg)
+  ![node api  bindings](https://www.luiztools.com.br/wp-content/uploads/2017/04/nodejs.jpg)
 
-- Máquina virtual do Node: Javascript execuntado e os Bindings do Node.Js transformando-o em linguagem C++.
-- Existe a camada aplicação que usa a engine V8 para executar o javascript.
-- Em outra camada chamada NODE.JS BINDIGNS que transforma o javascript e otimiza para c++ e executar na máquina a partir da LIBUV.
-- O event loop é quem delega os eventos dentro do NODE e responsável pelo envio das operações bloqueantes que o sistema operacional deve executar.
-- Quando o Sistema operacional resolve as operaçoes o event loop sinaliza para que solicitou.
-- O node é single thread para manipular o event loop.
-- As mulrithreads é responsabilidade do sistema operacional.
-- Se aprofundando mais no event loop, ele recebe uma solicitação de alguma operação junto com uma função que é responsavel por chamar o solicitante quando a operação terminar e entregar o resultado da operação.
-- Diferente de linguagens com C# e Java ele consegue manter a sincronização afim de manter a ordem dos fatores dentro da aplicação mesmo com a programação assíncrona.
+  - Máquina virtual do Node: Javascript execuntado e os Bindings do Node.Js transformando-o em linguagem C++.
+  - Existe a camada aplicação que usa a engine V8 para executar o javascript.
+  - Em outra camada chamada NODE.JS BINDIGNS que transforma o javascript e otimiza para c++ e executar na máquina a partir da LIBUV.
+  - O event loop é quem delega os eventos dentro do NODE e responsável pelo envio das operações bloqueantes que o sistema operacional deve executar.
+  - Quando o Sistema operacional resolve as operaçoes o event loop sinaliza para que solicitou.
+  - O node é single thread para manipular o event loop.
+  - As mulrithreads é responsabilidade do sistema operacional.
+  - Se aprofundando mais no event loop, ele recebe uma solicitação de alguma operação junto com uma função que é responsavel por chamar o solicitante quando a operação terminar e entregar o resultado da operação.
+  - Diferente de linguagens com C# e Java ele consegue manter a sincronização afim de manter a ordem dos fatores dentro da aplicação mesmo com a programação assíncrona.
 
-:arrow_up: Voltar para: [Tópicos](#tópicos)
+  :arrow_up: Voltar para: [Tópicos](#tópicos)
 
 #### Ciclo de vida Javascrip :arrows_counterclockwise:
 
@@ -88,117 +88,117 @@
 
 - **Simulação de problemas** :exclamation:
 
-```bash
-/*
-0 Obter um usuário
-1 Obter o numero de telefone de um usuario a partir de seu ID
-2 Obter o endereco de usuario pelo ID
-*/
+  ```bash
+  /*
+  0 Obter um usuário
+  1 Obter o numero de telefone de um usuario a partir de seu ID
+  2 Obter o endereco de usuario pelo ID
+  */
 
-function obterUsuario(){
-  setTimeout(function (){
-    return{
-      id:1,
-      nome:'Aladin',
-      dataNascimento:new Date()
-    }
-  }, 1000)
-}
+  function obterUsuario(){
+    setTimeout(function (){
+      return{
+        id:1,
+        nome:'Aladin',
+        dataNascimento:new Date()
+      }
+    }, 1000)
+  }
 
-function ObterTelefone(idUsuario){
-  setTimeout(() => {
-    return {
-      telefone:'129839812',
-      ddd:11
-    }
-  }, 2000);
-}
-function obterEndereco(idUsuario){
+  function ObterTelefone(idUsuario){
+    setTimeout(() => {
+      return {
+        telefone:'129839812',
+        ddd:11
+      }
+    }, 2000);
+  }
+  function obterEndereco(idUsuario){
 
-}
+  }
 
-const usuario = obterUsuario();
-const telefone = ObterTelefone(usuario.id);
+  const usuario = obterUsuario();
+  const telefone = ObterTelefone(usuario.id);
 
-console.log(`Usuário: ${usuario}`);
+  console.log(`Usuário: ${usuario}`);
 
-/*
- Aqui acontece um erro porque o console log é executado
- antes de chegar o resultado da função  obterUsuario
- e tentar acessar um campo id que não existe ainda
-*/
+  /*
+  Aqui acontece um erro porque o console log é executado
+  antes de chegar o resultado da função  obterUsuario
+  e tentar acessar um campo id que não existe ainda
+  */
 
-console.log(`Usuario: ${telefone}`);
-```
+  console.log(`Usuario: ${telefone}`);
+  ```
 
 - **Resolvendo o problema de sincronia**
 
-```bash
-/*
-0 Obter um usuário
-1 Obter o numero de telefone de um usuario a partir de seu ID
-2 Obter o endereco de usuario pelo ID
-*/
-
-function obterUsuario(callback) {
-  setTimeout(function () {
-    return callback(null, {
-      id: 1,
-      nome: "Aladin",
-      dataNascimento: new Date(),
-    });
-  }, 1000);
-}
-
-// passar o callback como ultimo parâmetro
-function ObterTelefone(idUsuario, callback) {
-  setTimeout(() => {
-    return callback(null,{
-      telefone: "129839812",
-      ddd: 11,
-    });
-  }, 2000);
-}
-
-function obterEndereco(idUsuario, callback) {
-  setTimeout(() => {
-    return callback(null,{
-      rua:'dos bobos',
-      numero:0
-    });
-  }, 2000);
-}
-
-
-obterUsuario(function resolverUsuario(error, usuario) {
+  ```bash
   /*
-  null ou "" ou 0 === false,
-  qualquer coisas diferente disso é igual a true em Javascript
-   */
-  if (error) {
-    console.error("Problemas com o usuário", error);
-    return;
-  }
-  ObterTelefone(usuario.id, function resolverTelefone(error1, telefone) {
-     if (error1) {
-       console.error("Problemas com o telefone do usuário", error);
-       return;
-     }
-     obterEndereco(usuario.id, function resolverEndereco(error2, endereco) {
-       if (error2) {
-         console.error("Problemas com o endereço do usuário", error);
-         return;
-       }
+  0 Obter um usuário
+  1 Obter o numero de telefone de um usuario a partir de seu ID
+  2 Obter o endereco de usuario pelo ID
+  */
 
-       console.log(`
-       Nome: ${usuario.nome},
-       Endereço: ${endereco.rua},Nº  ${endereco.numero},
-       Telefone: (${telefone.ddd}) ${telefone.telefone}
-       `)
-     })
-  })
-});
-```
+  function obterUsuario(callback) {
+    setTimeout(function () {
+      return callback(null, {
+        id: 1,
+        nome: "Aladin",
+        dataNascimento: new Date(),
+      });
+    }, 1000);
+  }
+
+  // passar o callback como ultimo parâmetro
+  function ObterTelefone(idUsuario, callback) {
+    setTimeout(() => {
+      return callback(null,{
+        telefone: "129839812",
+        ddd: 11,
+      });
+    }, 2000);
+  }
+
+  function obterEndereco(idUsuario, callback) {
+    setTimeout(() => {
+      return callback(null,{
+        rua:'dos bobos',
+        numero:0
+      });
+    }, 2000);
+  }
+
+
+  obterUsuario(function resolverUsuario(error, usuario) {
+    /*
+    null ou "" ou 0 === false,
+    qualquer coisas diferente disso é igual a true em Javascript
+    */
+    if (error) {
+      console.error("Problemas com o usuário", error);
+      return;
+    }
+    ObterTelefone(usuario.id, function resolverTelefone(error1, telefone) {
+      if (error1) {
+        console.error("Problemas com o telefone do usuário", error);
+        return;
+      }
+      obterEndereco(usuario.id, function resolverEndereco(error2, endereco) {
+        if (error2) {
+          console.error("Problemas com o endereço do usuário", error);
+          return;
+        }
+
+        console.log(`
+        Nome: ${usuario.nome},
+        Endereço: ${endereco.rua},Nº  ${endereco.numero},
+        Telefone: (${telefone.ddd}) ${telefone.telefone}
+        `)
+      })
+    })
+  });
+  ```
 
 :arrow_up: Voltar para: [Tópicos](#tópicos)
 
@@ -206,6 +206,7 @@ obterUsuario(function resolverUsuario(error, usuario) {
 
 - Promises: É um objeto que é usado para trabalhar em Javascript com toda a assincronia a partir de estados.
 - Fluxo das promises
+
   - Pode estar no estado **Pending** que é quando o estado inicial ainda não terminou ou ainda não foi rejeitado.
 
     > **obs:** caso uma promises fique nesses estado e não seja resolvida corretamente, você receberá o valor **Pending**, pode ser que esteja lendo e capturando a promises errada.
@@ -221,97 +222,101 @@ obterUsuario(function resolverUsuario(error, usuario) {
 
 #### Refatoração das callbacks para promise :dizzy:
 
-- Código exemplo de uma refatoração 
-```bash
-/*
-0 Obter um usuário
-1 Obter o numero de telefone de um usuario a parti de seu ID
-2 Obter o endereco de usuario pelo ID
-*/
-// convertendo uma callback para promise usando o módulo interno Node.JS sem alteração
-const util = require("util");
-const obterEnderocoAsync = util.promisify(obterEndereco);
+- Código exemplo de uma refatoração
 
-function obterEndereco(idUsuario, callback) {
-  setTimeout(() => {
-    return callback(null, {
-      rua: "dos bobos",
-      numero: 0,
-    });
-  }, 2000);
-}
-
-function obterUsuario() {
-  /* 
-    Quando der sucesso uso o RESOLVE
-    Quando der pronlema uso o REJECT 
+  ```bash
+  /*
+  0 Obter um usuário
+  1 Obter o numero de telefone de um usuario a parti de seu ID
+  2 Obter o endereco de usuario pelo ID
   */
-  return new Promise(function resolvePromise(resolve, reject) {
-    setTimeout(function () {
-      //return reject(new Error("Erro no sistema"));
-      return resolve({
-        id: 1,
-        nome: "Aladin",
-        dataNascimento: new Date(),
-      });
-    }, 1000);
-  });
-}
-// passar o callback como ultimo parâmetro
-function ObterTelefone(idUsuario) {
-  return new Promise(function resolverPromise(resolve, reject) {
+  // convertendo uma callback para promise usando o módulo interno Node.JS sem alteração
+  const util = require("util");
+  const obterEnderocoAsync = util.promisify(obterEndereco);
+
+  function obterEndereco(idUsuario, callback) {
     setTimeout(() => {
-      return resolve({
-        telefone: "129839812",
-        ddd: 11,
+      return callback(null, {
+        rua: "dos bobos",
+        numero: 0,
       });
     }, 2000);
-  });
-}
+  }
 
-const usuarioPromise = obterUsuario();
-// Para manipular o sucesso usamos a função .then
-// Para manipular erros, usamos o .catch
-/* 
-  Aqui passamos o resultado da promise usuario para frente e 
-  criamos um novo objeto com os dados reultantes da nova promise de telefone
-*/
-usuarioPromise
-  .then(function (resultadoUsuario) {
-    return ObterTelefone(resultadoUsuario.id).then(function resolverTelefone(
-      resultadoTelefone
-    ) {
-      return {
-        usuario: {
-          nome: resultadoUsuario.nome,
-          id: resultadoUsuario.id,
-        },
-        telefone: resultadoTelefone,
-      };
+  function obterUsuario() {
+    /*
+      Quando der sucesso uso o RESOLVE
+      Quando der pronlema uso o REJECT
+    */
+    return new Promise(function resolvePromise(resolve, reject) {
+      setTimeout(function () {
+        //return reject(new Error("Erro no sistema"));
+        return resolve({
+          id: 1,
+          nome: "Aladin",
+          dataNascimento: new Date(),
+        });
+      }, 1000);
     });
-  })
-  .then(function (resultado) {
-    const endereco = obterEnderocoAsync(resultado.usuario.id);
-    return endereco.then(function resolverEndereco(resultadoEndereco) {
-      return {
-        usuario: resultado.usuario,
-        telefone: resultado.telefone,
-        endereco: resultadoEndereco,
-      };
+  }
+  // passar o callback como ultimo parâmetro
+  function ObterTelefone(idUsuario) {
+    return new Promise(function resolverPromise(resolve, reject) {
+      setTimeout(() => {
+        return resolve({
+          telefone: "129839812",
+          ddd: 11,
+        });
+      }, 2000);
     });
-  })
-  .then(function (result) {
-    console.log(
-     `Usuario ${result.usuario.nome},
-      Telefone (${result.telefone.ddd}) ${result.telefone.telefone}
-      Rua: ${result.endereco.rua}`
-    );
-  })
-  .catch(function (error) {
-    console.error(`Não conseguimos encontrar o usuário`, error);
-  });
-  ````
-#### Promisses com Async e Await
+  }
+
+  const usuarioPromise = obterUsuario();
+  // Para manipular o sucesso usamos a função .then
+  // Para manipular erros, usamos o .catch
+  /*
+    Aqui passamos o resultado da promise usuario para frente e
+    criamos um novo objeto com os dados reultantes da nova promise de telefone
+  */
+  usuarioPromise
+    .then(function (resultadoUsuario) {
+      return ObterTelefone(resultadoUsuario.id).then(function resolverTelefone(
+        resultadoTelefone
+      ) {
+        return {
+          usuario: {
+            nome: resultadoUsuario.nome,
+            id: resultadoUsuario.id,
+          },
+          telefone: resultadoTelefone,
+        };
+      });
+    })
+    .then(function (resultado) {
+      const endereco = obterEnderocoAsync(resultado.usuario.id);
+      return endereco.then(function resolverEndereco(resultadoEndereco) {
+        return {
+          usuario: resultado.usuario,
+          telefone: resultado.telefone,
+          endereco: resultadoEndereco,
+        };
+      });
+    })
+    .then(function (result) {
+      console.log(
+      `Usuario ${result.usuario.nome},
+        Telefone (${result.telefone.ddd}) ${result.telefone.telefone}
+        Rua: ${result.endereco.rua}`
+      );
+    })
+    .catch(function (error) {
+      console.error(`Não conseguimos encontrar o usuário`, error);
+    });
+    ```
+
+  :arrow_up: Voltar para: [Tópicos](#tópicos)
+
+####  Promisses com Async e Await
 - É a melhor forma de resolver problema de promises aninhadas.
 - Facilita a visualização do fluxo das funçoes.
 - **Não** altera a performace da aplicação
@@ -339,9 +344,9 @@ usuarioPromise
   }
 
   function obterUsuario() {
-    /* 
+    /*
       Quando der sucesso uso o RESOLVE
-      Quando der pronlema uso o REJECT 
+      Quando der pronlema uso o REJECT
     */
     return new Promise(function resolvePromise(resolve, reject) {
       setTimeout(function () {
@@ -383,7 +388,7 @@ usuarioPromise
       `);
       console.timeEnd("tempo de execução");
 
-      // mais rápido na execução por executar em paralelo as promises 
+      // mais rápido na execução por executar em paralelo as promises
       // que não possuem dependencia da anterior
       console.time("tempo de execução");
 
@@ -405,9 +410,302 @@ usuarioPromise
     }
   }
   ```
+:arrow_up: Voltar para os [Tópicos](#tópicos)
+
+####  Utilizando o Event emitter
+
+- Faz parte da familia dos manipuladores de eventos do Node.js
+- É utilizado para executar ações contínuas
+> Ex: Quando um arquivo for renomeado salvar no banco de dados uma informação de  log
+- Node.js utiliza para quase tudo em seu ecossistema
+- Bastante usado nos Browsers como determinados eventos que ocorrem nas páginas atráves de interações com o  usuário.
+> Ex: `.onClick` , `.onChange` ...
+- Trabalha com o padrão Design Pattern  Observer/PubSub
+![obs](https://bbengfort.github.io/assets/images/2016-02-16-observer.png)
+![PubSub](https://i.morioh.com/b6c9d9a00e.png)
+
+- Exemplo de eventos
+  ```bash
+  const EventEmitter = require("events");
+
+  class MeuEmissor extends EventEmitter {}
+
+  const meuEmissor = new MeuEmissor();
+  const click = "usuario:click";
+
+  meuEmissor.on(click, function (click) {
+    console.log("um usuario clicou", click);
+  });
+
+  meuEmissor.emit(click, 'na Barra de Rolagem!')
+
+  const stdin = process.openStdin();
+
+  stdin.addListener("data", function (value) {
+    console.log(`Você digitou ${value.toString().trim()}`);
+  });
+
+  //Resultado: um usuario clicou na Barra de Rolagem!
+  // Você digita no terminal "asd"
+  // Resultado ao digitar no terminal: Você digitou asd
+  ```
+  >Obs: Promises usamos para executar uma única vez e Eventos para ações contínuas
 
 :arrow_up: Voltar para os [Tópicos](#tópicos)
 
+### Manipulação  e otimização de listas
+#### For, Forin e Forof
+- Utilizando a biblioteca axios para realizar o consumo da api SWAPI
+- usar um arquivo chamado **service.js** para ter o código de acesso aos serviços
+    ```bash
+    const axios = require("axios");
+    const URL = `https://swapi.dev/api/people`;
+
+    async function obterPessoas(nome) {
+      const url = `${URL}/${nome}`;
+      const response = await axios.get(url);
+      return response.data;
+    }
+
+    module.exports =  {obterPessoas}
+    ```
+
+- Usando o For, Forin e Forof e mostrando o tempo de execução do mais lento ao mais otimizado
+
+  ```bash
+    const service = require("./services/service-swapi");
+
+    async function main() {
+      try {
+        const result = await service.obterPessoas("1");
+        const films = [];
+        const resultFilms = result.films;
+
+        console.time("Time for");
+        for (let i = 0; i <= resultFilms.length - 1; i++) {
+          const element = resultFilms[i];
+          films.push(element);
+        }
+        console.timeEnd("Time for");
+
+        console.time("Time forin");
+        for (const i in resultFilms) {
+          const element = resultFilms[i];
+          films.push(element);
+        }
+        console.timeEnd("Time forin");
+
+        console.time("Time forof");
+        for (const film of resultFilms) {
+          films.push(film);
+        }
+        console.timeEnd("Time forof");
+
+        console.log(`Filmes`, films);
+      } catch (error) {
+        console.error(`error intern`, error);
+      }
+    }
+
+    main();
+    /*    ****Tempo de execuçao e os filmes****
+      Time for: 0.272ms
+      Time forin: 0.059ms
+      Time forof: 0.023ms
+      Filmes [
+        'http://swapi.dev/api/films/1/',
+        'http://swapi.dev/api/films/2/',
+        'http://swapi.dev/api/films/3/',
+        'http://swapi.dev/api/films/6/',
+        'http://swapi.dev/api/films/1/',
+        'http://swapi.dev/api/films/2/',
+        'http://swapi.dev/api/films/3/',
+        'http://swapi.dev/api/films/6/',
+        'http://swapi.dev/api/films/1/',
+        'http://swapi.dev/api/films/2/',
+        'http://swapi.dev/api/films/3/',
+        'http://swapi.dev/api/films/6/'
+      ]
+    */
+  ```
+
+:arrow_up: Voltar para os [Tópicos](#tópicos)
+#### Usando o Array.Map e foreach
+  ```bash
+   /*
+   Usando o Array.foreach
+   */
+    console.time("Time foreach");
+      resultFilms.forEach((element) => {
+        films.push(element);
+      });
+    console.timeEnd("Time foreach");
+
+    // Usando o Array.map
+    console.time("Time map");
+      const films_map = resultFilms.map((item) => item);
+    console.timeEnd("Time map");
+    
+    console.log(`Filmes`, films_map);
+    console.log(`Filmes`, films);
+  ```
+  - podemos usar o Array.map para substituir o Foreach e ter um código mais simples
+  - Também podemos criar nosso Array.map sobrescrevendo a Classe Array do Javascript e este é o funcionamento do Map:
+    ```bash
+    Array.prototype.novoMap = function (callback) {
+      const novoArrayMapeado = [];
+      for (let indice = 0; indice <= this.length - 1; indice++) 
+      {
+        const resultado = callback(
+          this[indice], 
+          indice);
+
+        novoArrayMapeado.push(resultado);
+      }
+      return novoArrayMapeado;
+    };
+
+    const filmsNovoMap = resultFilms.novoMap(function (film, indice) {
+      return `[${indice}] , ${film}`;
+    });
+
+    console.log(`Filmes`, filmsNovoMap);
+
+    /*Resultado:
+      Filmes [
+        '[0] , http://swapi.dev/api/films/1/',
+        '[1] , http://swapi.dev/api/films/2/',
+        '[2] , http://swapi.dev/api/films/3/',
+        '[3] , http://swapi.dev/api/films/6/'
+      ]
+    */
+    ```
+:arrow_up: Voltar para os [Tópicos](#tópicos)
+#### Trabalhando com  um  Array.Filter
+- Podemos filtrar um array pelo item que queremos usando o **filter** trazendo o valor de acordo com alguma condição  assim:
+  ```bash
+    // service.js
+
+    const axios = require("axios");
+    const URL = `https://swapi.dev/api/people`;
+
+    async function obterPessoas() {
+      const response = await axios.get(URL);
+      return response.data;
+    }
+    module.exports =  {obterPessoa, obterPessoas}
+
+    //index.js 
+
+    const { obterPessoas } = require("./services/service-swapi");
+    async function main() {
+      try {
+        const {results} = await obterPessoas();
+        const familiaLars = results.filter(function(item){
+          const result = item.name.toLowerCase().indexOf(`lars`) !== -1;
+          return result;
+        })
+        const names = familiaLars.map((pessoa)=> pessoa.name);
+        console.log(names); 
+      } catch (error) {
+        console.error(`error intern`, error);
+      }
+    }
+    // Resultado: [ 'Owen Lars', 'Beru Whitesun lars' ]
+  ```
+- Podemos também fazer um novo **filter**:
+  ````bash 
+  Array.prototype.novoFilter = function (callback) {
+    const lista = [];
+    for (index in this) {
+      const item = this[index];
+      const result = callback(item, index, this);
+      if (!result) continue;
+        lista.push(item);
+      }
+    return lista;
+  };
+
+  const familiaLars2 = results.novoFilter((item, index, lista) => {
+    console.log(`index: ${index}`,lista.length)
+    return  item.name.toLowerCase().indexOf("lars") !== -1;
+  });
+  const names2 = familiaLars2.map((pessoa) => pessoa.name);
+  console.log(names2);
+  ````
+:arrow_up: Voltar para os [Tópicos](#tópicos)
+
+#### Trabalhando com Array.reduce
+- O objetivo é reduzir a um valor final.
+- Usando o reduce para somar e concatenar strings:
+  ```bash
+    //service.js
+
+    const axios = require("axios");
+    const URL = `https://swapi.dev/api/people`;
+
+    async function obterPessoa(nome) {
+      const url = `${URL}/${nome}`;
+      const response = await axios.get(url);
+      return response.data;
+    }
+    async function obterPessoas() {
+      const response = await axios.get(URL);
+      return response.data;
+    }
+
+    module.exports =  {obterPessoa, obterPessoas}
+  ```
+
+  ```bash
+  //index.js
+
+  const { obterPessoas } = require("./services/service-swapi");
+
+  Array.prototype.novoReduce = function (callback, valorInicial) {
+    let valorFinal = typeof valorInicial !== undefined ? valorInicial : this[0];
+    for (let index = 0; index <= this.length - 1; index++) {
+      valorFinal = callback(valorFinal, this[index], this);
+    }
+    return valorFinal;
+  };
+
+  async function main() {
+    try {
+      const { results } = await obterPessoas();
+      const pesos = results.map((item) => parseInt(item.height));
+      console.log("lista de pesos:", pesos);
+      // o valor zero adicionado ao reduce é para não dar erro se passar um array vazio, sendo obrigado inicializar o valor do array
+      const total = pesos.reduce((anterior, proximo) => {
+        return anterior + proximo;
+      }, 0);
+      console.log(`Soma dos pesos: ${total} `);
+
+      const minhaLista = ["Joel", "Maykon","tem","as","skills","em", "Node.js","e", "javascript"];
+      const frase = minhaLista
+        .novoReduce((anterior, proximo) => {
+          return anterior.concat(proximo);
+        }, [])
+        .join(" ");
+        console.log(`A frase é: ${frase}`);
+    } catch (error) {
+      console.error(`error intern`, error);
+    }
+  }
+  
+  main();
+  
+  /* Resultado:
+    lista de pesos: [
+    172, 167,  96, 202,
+    150, 178, 165,  97,
+    183, 182
+    ]
+    Soma do peso: 1592 
+    A frase é: Joel Maykon tem as skills em Node.js e javascript
+  */
+  ```
+:arrow_up: Voltar para os [Tópicos](#tópicos)
 ## Desenvolvedores/Contribuintes :)
 
 O time responsável pelo desenvolvimento do projeto
