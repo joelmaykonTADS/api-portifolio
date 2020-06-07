@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "serviço para servir dados para meu portifólio",
+  "main": "index.js",
+  "scripts": {
+    "dev":"node index.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joelmaykonTADS"
+  },
+  "keywords": [
+    "Portifólio"
+  ],
+  "author": "Joel Maykon",
+  "license": "MIT"
+}
