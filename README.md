@@ -3,7 +3,7 @@
 <p align="center">
    <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=RED&style=for-the-badge"/>
      <img src="http://img.shields.io/static/v1?label=ambiente&message=NODE.JS&color=GREEN&style=for-the-badge"/>
-      <img src="http://img.shields.io/static/v1?label=gestão de DEPENDÊNCIAS&message=%20NPM&color=orange&style=for-the-badge"/>
+      <img src="http://img.shields.io/static/v1?label=DEPENDÊNCIAS&message=%20NPM&color=orange&style=for-the-badge"/>
      
 </p>
 
@@ -30,15 +30,15 @@
    O conteudo foi baseado em uma pesquisa feitas pelo Trainer  <a href="https://www.linkedin.com/in/erickwendel">Erick Wendel</a>  para saber quais as maiores dificuldades do desenvolvedores javascript para torna-se mais produtivo, e o objetivo é ter uma aplicação que vai do básico ao nível de produção documentada, funcionando de ponta a ponta.  
 </p>
 
-1º Usar Conceitos do javascript
-2º Manipulação de listas e otimização de performace das listas.
-3º Criação de ferramentas de linha de comando.
-4º Trabalhar com multiplos banco de dados.
-5º Criar a API usando o [Hapi.js](https://hapi.dev/) e plugins, buscando está preparado para desafios do mundo real.
-6º documentação usando o swagger e alguns plugins.
-7º autenticação usando JWT.
-8º Publicar a aplicação e deixar disponivel para o usuário acessar pela internet.
-9º Dividir em ambiente de desenvolvimento, de homologação e de produção.
+- 1º Usar Conceitos do javascript
+- 2º Manipulação de listas e otimização de performace das listas.
+- 3º Criação de ferramentas de linha de comando.
+- 4º Trabalhar com multiplos banco de dados.
+- 5º Criar a API usando o [Hapi.js](https://hapi.dev/) e plugins, buscando está preparado para desafios do mundo real.
+- 6º documentação usando o swagger e alguns plugins.
+- 7º autenticação usando JWT.
+- 8º Publicar a aplicação e deixar disponivel para o usuário acessar pela internet.
+- 9º Dividir em ambiente de desenvolvimento, de homologação e de produção.
 
 ## NPM a ferramenta para gestão de pacotes :hammer:
 
