@@ -6,25 +6,30 @@
       <img src="http://img.shields.io/static/v1?label=DEPENDÊNCIAS&message=%20NPM&color=orange&style=for-the-badge"/>
      
 </p>
+# Tópicos
+- [Tópicos](#tópicos)
+  - [Resumo do projeto API Portifólio   :book:](#resumo-do-projeto-api-portifólio-book)
+  - [NPM a ferramenta para gestão de pacotes :hammer:](#npm-a-ferramenta-para-gestão-de-pacotes-hammer)
+    - [Início de um projeto Node :seedling:](#início-de-um-projeto-node-seedling)
+    - [Conceitos dentro de um projeto NODE.JS :school:](#conceitos-dentro-de-um-projeto-nodejs-school)
+      - [Sincronia de funçoes Javascript :repeat:](#sincronia-de-funçoes-javascript-repeat)
+      - [Ciclo de vida Javascrip :arrows_counterclockwise:](#ciclo-de-vida-javascrip-arrows_counterclockwise)
+      - [Promises ciclo de vida :star:](#promises-ciclo-de-vida-star)
+      - [Refatoração das callbacks para promise :dizzy:](#refatoração-das-callbacks-para-promise-dizzy)
+      - [Utilizando o Event emitter](#utilizando-o-event-emitter)
+    - [Manipulação  e otimização de listas](#manipulação-e-otimização-de-listas)
+      - [For, Forin e Forof](#for-forin-e-forof)
+      - [Usando o Array.Map e foreach](#usando-o-arraymap-e-foreach)
+      - [Trabalhando com  o  Array.Filter](#trabalhando-com-o-arrayfilter)
+      - [Trabalhando com Array.reduce](#trabalhando-com-arrayreduce)
+    - [Teste de software](#teste-de-software)
+      - [Testes automatizados - TDD](#testes-automatizados---tdd)
+  - [Ferramentas de linha de comando](#ferramentas-de-linha-de-comando)
+    - [Padronização das entradas independente da base de dadis](#padronização-das-entradas-independente-da-base-de-dadis)
+  - [Desenvolvedores/Contribuintes :)](#desenvolvedorescontribuintes-)
+  - [Licença](#licença)
 
-- [Resumo do projeto Node JS :book:](#resumo-do-projeto-node-js-book)
-- [NPM a ferramenta para gestão de pacotes :hammer:](#npm-a-ferramenta-para-gestão-de-pacotes-hammer)
-  - [Início de um projeto Node :seedling:](#início-de-um-projeto-node-seedling)
-  - [Conceitos dentro de um projeto NODE.JS :school:](#conceitos-dentro-de-um-projeto-nodejs-school)
-    - [Sincronia de funçoes Javascript :repeat:](#sincronia-de-funçoes-javascript-repeat)
-    - [Ciclo de vida Javascrip :arrows_counterclockwise:](#ciclo-de-vida-javascrip-arrows_counterclockwise)
-    - [Promises ciclo de vida :star:](#promises-ciclo-de-vida-star)
-    - [Refatoração das callbacks para promise :dizzy:](#refatoração-das-callbacks-para-promise-dizzy)
-    - [Utilizando o Event emitter](#utilizando-o-event-emitter)
-  - [Manipulação  e otimização de listas](#manipulação-e-otimização-de-listas)
-    - [For, Forin e Forof](#for-forin-e-forof)
-    - [Usando o Array.Map e foreach](#usando-o-arraymap-e-foreach)
-    - [Trabalhando com  um  Array.Filter](#trabalhando-com-um-arrayfilter)
-    - [Trabalhando com Array.reduce](#trabalhando-com-arrayreduce)
-- [Desenvolvedores/Contribuintes :)](#desenvolvedorescontribuintes-)
-- [Licença](#licença)
-
-## Resumo do projeto Node JS :book:
+## Resumo do projeto API Portifólio   :book:
 
 <p align="justify">
    O conteudo foi baseado em uma pesquisa feitas pelo Trainer  <a href="https://www.linkedin.com/in/erickwendel">Erick Wendel</a>  para saber quais as maiores dificuldades do desenvolvedores javascript para torna-se mais produtivo, e o objetivo é ter uma aplicação que vai do básico ao nível de produção documentada, funcionando de ponta a ponta.  
@@ -581,7 +586,8 @@
     */
     ```
 :arrow_up: Voltar para os [Tópicos](#tópicos)
-#### Trabalhando com  um  Array.Filter
+
+#### Trabalhando com  o  Array.Filter
 - Podemos filtrar um array pelo item que queremos usando o **filter** trazendo o valor de acordo com alguma condição  assim:
   ```bash
     // service.js
@@ -706,6 +712,87 @@
   */
   ```
 :arrow_up: Voltar para os [Tópicos](#tópicos)
+
+### Teste de software
+- O teste de software é uma maneira de avaliar a qualidade do software e reduzir o risco de falha no software em operação.
+- Testar não consiste em apenas executar testes (executar o software e verificar os resultados). Executar testes é apenas umas das atividades de teste.
+- Planejamento, análise, modelagem e implementação dos testes, relatórios de progresso e resultado e avaliação da qualidade, também são partes de um processo de testes.
+
+#### Testes automatizados - TDD
+- O objetivo é construir o teste, depois implementar e voltar para refatorar, seguindo um ciclo orientado a teste.
+- usando o **assert**, nativo para teste, do **node**:
+  ```bash
+  //arquivo  tests.js
+  const assert = require('assert');
+
+  // o teste abaixo vai dar certo
+  assets.ok(true);
+
+  /* o teste abaixo  vai dar erro
+  generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  */
+
+  assert.ok(false);
+  ```
+- usando o **Mocha** para testes automatizados
+  - Para instalar globalmente 
+  `yarn global add mocha`
+  - Para adicionar como dependência de desenvolvimento
+  `yarn add mocha --save-dev`
+  - instalar o **nock** para mockar a api
+  `yarn add nock` 
+- Realizando testes usando api swapi
+  ```bash
+  //service
+  const axios = require("axios");
+  const URL = `https://swapi.dev/api/people`;
+
+  async function obterPessoa(number) {
+    const url = `${URL}/${number}`;
+    const response = await axios.get(url);
+    return mapearPessoa(response.data);
+  }
+  function mapearPessoa(item) {
+    return{
+      nome:item.name,
+      peso:item.height
+    }
+  }
+  ```
+
+  ```bash
+  //Teste com  Mock api SWAPI
+  const assert = require("assert");
+  const nock = require("nock");
+  const { obterPessoa } = require("../services/service-swapi.js");
+
+  //suíte de testes
+  describe("Star Wars Tests", function () {
+    this.beforeAll(() => {
+      const response = { name: "Luke Skywalker", height: "172" };
+      nock("https://swapi.dev/api/people").get("/1").reply(200, response);
+    });
+
+    // Sub Suíte de teste
+    it("deve buscar o Luke Skywalker com o formato correto", async () => {
+      const expected = { nome: "Luke Skywalker", peso: "172" };
+      const nomeBase = `1`;
+      const resultado = await obterPessoa(nomeBase);
+      assert.deepEqual(resultado, expected);
+    });
+  });
+  ```
+
+:arrow_up: Voltar para os [Tópicos](#tópicos)
+
+## Ferramentas de linha de comando
+- CLI significa Command Line Interface, ou seja, é uma ferramenta que disponibiliza uma interface de linha de comando para que você possa executar alguns comandos específicos no terminal. Normalmente essas ferramentas são criadas utilizando shell script, mas nós vamos criar a nossa com Javascript :D
+### Padronização das entradas independente da base de dadis
+
 ## Desenvolvedores/Contribuintes :)
 
 O time responsável pelo desenvolvimento do projeto

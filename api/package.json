@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node index.js",
-    "test": "test"
+    "test": "node ./tests/test.js",
+    "mocha": "mocha  ./tests"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   "author": "Joel Maykon",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "mocha": "^8.0.1",
+    "nock": "^12.0.3"
   }
 }
