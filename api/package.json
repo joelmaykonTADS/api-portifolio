@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node index.js",
     "test": "node ./tests/test.js",
-    "mocha": "mocha  ./tests"
+    "mocha": "mocha  ./tests --reporter=progress -w"
   },
   "repository": {
     "type": "git",

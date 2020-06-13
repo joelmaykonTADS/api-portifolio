@@ -10,7 +10,6 @@
 
 # Tópicos
 - [Tópicos](#tópicos)
-  - [Passos de desenvolvimento do projeto](#passos-de-desenvolvimento-do-projeto)
   - [Resumo dos conceitos aplicados ao  projeto   :book:](#resumo-dos-conceitos-aplicados-ao-projeto-book)
   - [NPM a ferramenta para gestão de pacotes :hammer:](#npm-a-ferramenta-para-gestão-de-pacotes-hammer)
     - [Início de um projeto Node :seedling:](#início-de-um-projeto-node-seedling)
@@ -28,26 +27,11 @@
     - [Teste de software](#teste-de-software)
       - [Testes automatizados - TDD](#testes-automatizados---tdd)
     - [Ferramentas de linha de comando](#ferramentas-de-linha-de-comando)
-      - [READ Manipulação de arquivos :file_folder:](#read-manipulação-de-arquivos-file_folder)
+      - [CRUD  Manipulação de arquivos :file_folder:](#crud-manipulação-de-arquivos-file_folder)
   - [Desenvolvedores/Contribuintes :)](#desenvolvedorescontribuintes-)
   - [Licença](#licença)
 
-## Passos de desenvolvimento do projeto
 
-<table>
-  <tr>
-    <td>Funcionalidade</td>
-    <td>Tests</td>
-    <td>Models</td>
-    <td>Services</td>
-  </tr>
-  <tr>
-    <td>01)  Criar CRUD de Projetos</td>
-    <td><a href="/api/tests/project.test.js">project.test</a></td>
-    <td><a href="/api/models/project.js">project</a></td>
-    <td><a href="/api/services/service-project.js">service-project</a></td>
-  </tr>
-</table>
 ## Resumo dos conceitos aplicados ao  projeto   :book:
 
 <p align="justify">
@@ -810,7 +794,24 @@
 
 ### Ferramentas de linha de comando
 - CLI significa Command Line Interface, ou seja, é uma ferramenta que disponibiliza uma interface de linha de comando para que você possa executar alguns comandos específicos no terminal. Normalmente essas ferramentas são criadas utilizando shell script, mas nós vamos criar a nossa com Javascript :D
-#### READ Manipulação de arquivos :file_folder:
+#### CRUD  Manipulação de arquivos :file_folder:
+<table>
+  <tr>
+    <td>Funcionalidade</td>
+    <td>Tests</td>
+    <td>Models</td>
+    <td>Database</td>
+  </tr>
+  <tr>
+    <td>01)  CRUD de Projetos</td>
+    <td><a href="/api/tests/project.test.js">project.test</a></td>
+    <td><a href="/api/models/project.js">project</a></td>
+    <td><a href="./api/database/projects.json" >project.json</a></td>
+  </tr>
+</table>
+
+:arrow_up: Voltar para os [Tópicos](#tópicos)
+
 
 ## Desenvolvedores/Contribuintes :)
 
