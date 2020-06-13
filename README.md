@@ -6,9 +6,12 @@
       <img src="http://img.shields.io/static/v1?label=DEPENDÊNCIAS&message=%20NPM&color=orange&style=for-the-badge"/>
      
 </p>
+
+
 # Tópicos
 - [Tópicos](#tópicos)
-  - [Resumo do projeto API Portifólio   :book:](#resumo-do-projeto-api-portifólio-book)
+  - [Passos de desenvolvimento do projeto](#passos-de-desenvolvimento-do-projeto)
+  - [Resumo dos conceitos aplicados ao  projeto   :book:](#resumo-dos-conceitos-aplicados-ao-projeto-book)
   - [NPM a ferramenta para gestão de pacotes :hammer:](#npm-a-ferramenta-para-gestão-de-pacotes-hammer)
     - [Início de um projeto Node :seedling:](#início-de-um-projeto-node-seedling)
     - [Conceitos dentro de um projeto NODE.JS :school:](#conceitos-dentro-de-um-projeto-nodejs-school)
@@ -24,12 +27,28 @@
       - [Trabalhando com Array.reduce](#trabalhando-com-arrayreduce)
     - [Teste de software](#teste-de-software)
       - [Testes automatizados - TDD](#testes-automatizados---tdd)
-  - [Ferramentas de linha de comando](#ferramentas-de-linha-de-comando)
-    - [Padronização das entradas independente da base de dadis](#padronização-das-entradas-independente-da-base-de-dadis)
+    - [Ferramentas de linha de comando](#ferramentas-de-linha-de-comando)
+      - [READ Manipulação de arquivos :file_folder:](#read-manipulação-de-arquivos-file_folder)
   - [Desenvolvedores/Contribuintes :)](#desenvolvedorescontribuintes-)
   - [Licença](#licença)
 
-## Resumo do projeto API Portifólio   :book:
+## Passos de desenvolvimento do projeto
+
+<table>
+  <tr>
+    <td>Funcionalidade</td>
+    <td>Tests</td>
+    <td>Models</td>
+    <td>Services</td>
+  </tr>
+  <tr>
+    <td>01)  Criar CRUD de Projetos</td>
+    <td><a href="/api/tests/project.test.js">project.test</a></td>
+    <td><a href="/api/models/project.js">project</a></td>
+    <td><a href="/api/services/service-project.js">service-project</a></td>
+  </tr>
+</table>
+## Resumo dos conceitos aplicados ao  projeto   :book:
 
 <p align="justify">
    O conteudo foi baseado em uma pesquisa feitas pelo Trainer  <a href="https://www.linkedin.com/in/erickwendel">Erick Wendel</a>  para saber quais as maiores dificuldades do desenvolvedores javascript para torna-se mais produtivo, e o objetivo é ter uma aplicação que vai do básico ao nível de produção documentada, funcionando de ponta a ponta.  
@@ -789,11 +808,13 @@
 
 :arrow_up: Voltar para os [Tópicos](#tópicos)
 
-## Ferramentas de linha de comando
+### Ferramentas de linha de comando
 - CLI significa Command Line Interface, ou seja, é uma ferramenta que disponibiliza uma interface de linha de comando para que você possa executar alguns comandos específicos no terminal. Normalmente essas ferramentas são criadas utilizando shell script, mas nós vamos criar a nossa com Javascript :D
-### Padronização das entradas independente da base de dadis
+#### READ Manipulação de arquivos :file_folder:
 
 ## Desenvolvedores/Contribuintes :)
+
+:arrow_up: Voltar para os [Tópicos](#tópicos)
 
 O time responsável pelo desenvolvimento do projeto
 

@@ -18,7 +18,9 @@
   "author": "Joel Maykon",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.19.2"
+  },
+  "devDependencies": {
     "mocha": "^8.0.1",
     "nock": "^12.0.3"
   }
