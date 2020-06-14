@@ -2,10 +2,15 @@
 const path = require("path");
 
 // Módulo interno para ler arquivos
-const { readFile, writeFile } = require("fs");
+const {
+  readFile,
+  writeFile
+} = require("fs");
 
 // Módulo para converter callback para promise
-const { promisify } = require("util");
+const {
+  promisify
+} = require("util");
 
 //conversão da callback para promise
 const readFileAsync = promisify(readFile);
@@ -45,14 +50,30 @@ class Project {
     const dataFilter = projects.filter((item) => (id ? item.id === id : true));
     return dataFilter;
   }
-
+  async update(id, project) {
+    const projects  = await this.getProjects();
+    const index = projects.findIndex(item => item.id === parseInt(id));
+    if (index === -1) {
+      throw Error('O projeto não existe');
+    }
+    const currentProject = projects[index];
+    const projectUpdate = {
+      ...currentProject,
+      ...project
+    }
+    projects.splice(index, 1);
+    return await this.writeProject([
+      ...projects,
+      projectUpdate
+    ]);
+  }
   async delete(id) {
-    if(!id){
+    if (!id) {
       return await this.writeProject([]);
     }
     const data = await this.getProjects()
-    const index = data.findIndex(item =>item.id === parseInt(id))
-    if(index === -1){
+    const index = data.findIndex(item => item.id === parseInt(id))
+    if (index === -1) {
       throw Error('Error: Project not exist!')
     }
     data.splice(index, 1);
