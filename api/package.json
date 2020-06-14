@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node index.js",
     "test": "node ./tests/test.js",
-    "mocha": "mocha  ./tests --reporter=progress -w"
+    "mocha": "mocha  ./tests  -w"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
   "author": "Joel Maykon",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "commander": "^5.1.0"
   },
   "devDependencies": {
     "mocha": "^8.0.1",

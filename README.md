@@ -26,8 +26,9 @@
       - [Trabalhando com Array.reduce](#trabalhando-com-arrayreduce)
     - [Teste de software](#teste-de-software)
       - [Testes automatizados - TDD](#testes-automatizados---tdd)
-    - [Ferramentas de linha de comando](#ferramentas-de-linha-de-comando)
+    - [CLI Ferramenta de linha de comando](#cli-ferramenta-de-linha-de-comando)
       - [CRUD  Manipulação de arquivos :file_folder:](#crud-manipulação-de-arquivos-file_folder)
+    - [Acesso a multiplos bancos de dados](#acesso-a-multiplos-bancos-de-dados)
   - [Desenvolvedores/Contribuintes :)](#desenvolvedorescontribuintes-)
   - [Licença](#licença)
 
@@ -80,7 +81,7 @@
   - O event loop é quem delega os eventos dentro do NODE e responsável pelo envio das operações bloqueantes que o sistema operacional deve executar.
   - Quando o Sistema operacional resolve as operaçoes o event loop sinaliza para que solicitou.
   - O node é single thread para manipular o event loop.
-  - As mulrithreads é responsabilidade do sistema operacional.
+  - As multithreads é responsabilidade do sistema operacional.
   - Se aprofundando mais no event loop, ele recebe uma solicitação de alguma operação junto com uma função que é responsavel por chamar o solicitante quando a operação terminar e entregar o resultado da operação.
   - Diferente de linguagens com C# e Java ele consegue manter a sincronização afim de manter a ordem dos fatores dentro da aplicação mesmo com a programação assíncrona.
 
@@ -88,7 +89,7 @@
 
 #### Ciclo de vida Javascrip :arrows_counterclockwise:
 
-- Tudo que for funções que rodam externamente executam em background, exemplo ler um arquivo, acessar um banco de dados ou consumir uma API para que o event loop possa retornar o resultado para o local onde foi registrada a função.
+- Tudo que for funções que rodam externamente executam em background, por exemplo, ler um arquivo, acessar um banco de dados ou consumir uma API para que o event loop possa retornar o resultado para o local onde foi registrada a função.
 - A forma com que seu código é escrito é diferente de como ele é executado, por algum motivo você pode receber um valor null ou underfined, isso ocorre porque a resposta chegou depois que outra parte do código ja foi executada.
 - Por isso é necessário manter a ordem de sua execução para evitar problemas, garantir que a ordem está correta para evitar supresas em nossos resultados.
 
@@ -792,23 +793,96 @@
 
 :arrow_up: Voltar para os [Tópicos](#tópicos)
 
-### Ferramentas de linha de comando
+### CLI Ferramenta de linha de comando
 - CLI significa Command Line Interface, ou seja, é uma ferramenta que disponibiliza uma interface de linha de comando para que você possa executar alguns comandos específicos no terminal. Normalmente essas ferramentas são criadas utilizando shell script, mas nós vamos criar a nossa com Javascript :D
 #### CRUD  Manipulação de arquivos :file_folder:
-<table>
-  <tr>
-    <td>Funcionalidade</td>
-    <td>Tests</td>
-    <td>Models</td>
-    <td>Database</td>
-  </tr>
-  <tr>
-    <td>01)  CRUD de Projetos</td>
-    <td><a href="/api/tests/project.test.js">project.test</a></td>
-    <td><a href="/api/models/project.js">project</a></td>
-    <td><a href="./api/database/projects.json" >project.json</a></td>
-  </tr>
-</table>
+- Implementações criadas para **manipular** **projetos** salvos em um arquivo **JSON**
+  <table>
+    <tr>
+      <td>Funcionalidade</td>
+      <td>Tests</td>
+      <td>Service</td>
+      <td>Database</td>
+      <td>Models</td>
+    </tr>
+    <tr>
+      <td>01)  CRUD de Projetos</td>
+      <td><a href="/api/tests/project.test.js">project.test</a></td>
+      <td><a href="/api/services/service-project.js">service-project</a></td>
+      <td><a href="./api/database/projects.json" >project.json</a></td>
+      <td><a href="./api/models/project.js" >project</a></td>
+    </tr>
+  </table>
+
+  - Uso de linha de comando para realizar ações do CRUD de projetos
+
+  ```bash
+  const Commander = require("commander");
+  const Project = require('./models/project')
+  const ServiceProject = require('./services/service-project');
+
+  async function main() {
+    Commander
+      .version('v1')
+      .option('-n, --nome [value]', "Name of project")
+      .option('-t, --tipo [value]', "Type of project")
+      .option('-i, --id [value]', "Id of project")
+
+      .option('-c, --create', "Create project")
+      .option('-a, --all', "All project")
+      .option('-d, --delete', "Delete project")
+      .option('-u, --update [value]', "Update project")
+      .parse(process.argv);
+    const project = new Project(Commander)
+    try {
+      if (Commander.create) {
+        delete project.id;
+        const result = await ServiceProject.create(project);
+        if (!result) {
+          console.error('Projeto não foi cadastrado');
+          return;
+        }
+        console.log('Projeto cadastrado com sucesso!');
+      }
+      if (Commander.all) {
+        const result = await ServiceProject.getProjects();
+        console.log(result);
+        return;
+      }
+      if (Commander.delete) {
+        const result = await ServiceProject.delete(project.id);
+        if (!result) {
+          console.error('Não foi possível deletar projeto');
+          return;
+        }
+        console.log("Projeto deletado com sucesso!");
+      }
+      if(Commander.update){
+        const idUpdate = parseInt(Commander.update);
+        //remover chaves com undefined
+        const dado = JSON.stringify(project);
+        const projectUpdate = JSON.parse(dado);
+        const result = await ServiceProject.update(idUpdate, projectUpdate);
+        if (!result) {
+          console.error('Não foi posível atualizar projeto');
+          return;
+        }
+        console.log('Projeto atualizado com sucesso!')
+      }
+    } catch (error) {
+      console.error('Failure System')
+    }
+
+  }
+  main();
+  ```
+
+:arrow_up: Voltar para os [Tópicos](#tópicos)
+
+### Acesso a multiplos bancos de dados
+
+- Utilizando uma implementação que tenha uma base dados híbrida que consiga trabalhar com vários bancos de dados execuntado em containers **Docker** com clientes rodando também **dockerizados** usando o padrão **estrategy** para fazer a comunicação entre esses clientes.
+  > " Segundo o catálogo GOF o padrão **estrategy** tem como meta: "Definir uma família de algoritmos, encapsular cada uma delas e torná-las intercambiáveis. Strategy permite que o algoritmo varie independentemente dos clientes que o utilizam."
 
 :arrow_up: Voltar para os [Tópicos](#tópicos)
 

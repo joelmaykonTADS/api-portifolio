@@ -2,7 +2,7 @@ const {
   deepEqual,
   ok
 } = require("assert");
-const projects = require("../models/project");
+const projects = require("../services/service-project");
 const DEFAULT_PROJECT = {
   nome: "Portifólio",
   tipo: "Pessoal",
