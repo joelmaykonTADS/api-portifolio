@@ -1,8 +1,11 @@
 const Commander = require("commander");
 const Project = require('./models/project')
 const ServiceProject = require('./services/service-project');
-
+var EventEmitter = require('events').EventEmitter;
+var counter = 0;
 async function main() {
+  var em = new EventEmitter();
+  
   Commander
     .version('v1')
     .option('-n, --nome [value]', "Name of project")
